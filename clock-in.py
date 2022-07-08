@@ -107,7 +107,8 @@ class ClockIn(object):
         new_info["address"] = "浙江省杭州市西湖区"
         new_info["area"] = "浙江省 杭州市 西湖区"
         new_info["province"] = new_info["area"].split(' ')[0]
-        new_info["city"] = new_info["area"].split(' ')[1]
+        new_info["city"] = new_info["area"].split(' ')[1] 
+        new_info['internship'] = 3
         # form change
         new_info['jrdqtlqk[]'] = 0
         new_info['jrdqjcqk[]'] = 0
