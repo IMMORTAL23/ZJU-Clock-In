@@ -7,26 +7,30 @@ on:
   watch:
     types: started
   schedule:
-    - cron: 0 */8 * * *
+    - cron: '0 */6 * * *'
 
 jobs:
   ClockIn:
     runs-on: ubuntu-latest
-    if: github.event.repository.owner.id == github.event.sender.id
     steps:
-      - name: Checkout
-        uses: actions/checkout@master
-      - name: Setup Python
-        uses: actions/setup-python@v3.1.0
-        with:
-          python-version: 3.9
-      - name: Install packages
-        run: |
-          pip3 install requests
-          pip3 install ddddocr
-      - name: Clock In
-        env:
-          ACCOUNT: ${{ secrets.ACCOUNT }}
-          PASSWORD: ${{ secrets.PASSWORD }}
-        run: |
-          python3 clock-in.py ${ACCOUNT} ${PASSWORD}
+      - name: begin
+        run: echo "work begin"
+        if: >-
+          github.event.repository.owner.id == github.event.sender.id ||
+          github.event.schedule == '0 */6 * * *'
+          - name: Checkout
+            uses: actions/checkout@master
+          - name: Setup Python
+            uses: actions/setup-python@v3.1.0
+            with:
+              python-version: 3.9
+          - name: Install packages
+            run: |
+              pip3 install requests
+              pip3 install ddddocr
+          - name: Clock In
+            env:
+              ACCOUNT: ${{ secrets.ACCOUNT }}
+              PASSWORD: ${{ secrets.PASSWORD }}
+            run: |
+              python3 clock-in.py ${ACCOUNT} ${PASSWORD}
