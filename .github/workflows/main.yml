@@ -7,13 +7,13 @@ on:
   watch:
     types: started
   schedule:
-    - cron: '0 */6 * * *'
+    - cron: '10 8/4 * * *'
 
 jobs:
   ClockIn:
     runs-on: ubuntu-latest
     if: github.event.repository.owner.id == github.event.sender.id ||
-      github.event.schedule == '0 */6 * * *'
+      github.event.schedule == '10 8/4 * * *'
     steps:
       - name: begin
         run: echo "work begin"
